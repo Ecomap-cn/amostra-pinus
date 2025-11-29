@@ -139,38 +139,126 @@
             margin-top: 4px;
         }
 
-        /* PAINEL DA LOGO ECOMAP (canto inferior esquerdo) */
-        .logo-panel {
-            font-family: Arial, Helvetica, sans-serif;
-            background: rgba(255,255,255,0.95);
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.35);
-            padding: 6px 8px;
-            max-width: 230px;           /* tamanho padrão no desktop */
-        }
-        .logo-panel img {
-            display: block;
-            width: 100%;               /* ocupa toda a largura do painel */
-            height: auto;
-        }
-        .logo-panel-text {
-            margin-top: 4px;
-            font-size: 11px;           /* texto menor */
-            line-height: 1.2;
-            color: #000;
-            text-align: left;
-        }
+/* PAINEL DA LOGO ECOMAP (canto inferior esquerdo) */
+.logo-panel {
+    font-family: Arial, Helvetica, sans-serif;
+    background: rgba(255,255,255,0.95);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.35);
+    padding: 6px 8px;
+    max-width: 170px;     /* desktop quase igual ao que você gostou */
+    margin-bottom: 4px;
+}
 
-        /* MOBILE: tudo menor pra não brigar com o dashboard */
-        @media (max-width: 400px) {
-            .logo-panel {
-                max-width: 90px;
-                padding: 4px 6px;
-            }
-            .logo-panel-text {
-                font-size: 6px;
-            }
-        }
+.logo-panel img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* texto abaixo da logo */
+.logo-panel-text {
+    margin-top: 4px;
+    font-size: 10px;
+    line-height: 1.2;
+    color: #000;
+    text-align: left;
+}
+
+/* TABLET (até ~900px) */
+@media (max-width: 900px) {
+    .logo-panel {
+        max-width: 130px;
+        padding: 5px 6px;
+    }
+    .logo-panel-text {
+        font-size: 9px;
+    }
+}
+
+/* CELULAR MÉDIO (até ~700px) */
+@media (max-width: 700px) {
+    .logo-panel {
+        max-width: 110px;
+        padding: 4px 5px;
+    }
+    .logo-panel-text {
+        font-size: 8px;
+        line-height: 1.15;
+    }
+}
+
+/* CELULAR (até ~500px) – onde está seu smartphone */
+@media (max-width: 500px) {
+    .logo-panel {
+        max-width: 80px;   /* BEM menor */
+        padding: 3px 4px;
+    }
+    .logo-panel-text {
+        font-size: 6px;
+        line-height: 1.1;
+    }
+}
+
+/* CELULAR PEQUENO (até ~400px) */
+@media (max-width: 400px) {
+    .logo-panel {
+        max-width: 70px;
+        padding: 2px 3px;
+    }
+    .logo-panel-text {
+        font-size: 5px;
+        line-height: 1.05;
+    }
+}
+
+/* === AGORA COLE AQUI OS ESTILOS DAS TABELAS === */
+
+.eco-table-details {
+  margin-top: 6px;
+  background: #f7f7f7;
+  border-radius: 8px;
+  border: 1px solid #cccccc;
+  padding: 6px;
+}
+
+.eco-table-details summary {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.eco-table-wrapper {
+  max-height: 30vh;
+  overflow-y: auto;
+  margin-top: 6px;
+}
+
+.eco-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+
+.eco-table th {
+  background: #333;
+  color: #fff;
+  padding: 4px;
+}
+
+.eco-table td {
+  border: 1px solid #ccc;
+  padding: 4px;
+}
+
+@media(max-width:768px){
+  .eco-table {
+    font-size: 0.72rem;
+  }
+  .eco-table-wrapper {
+    max-height: 36vh;
+  }
+}
+
         </style>
 
         <title></title>
@@ -873,7 +961,7 @@
                 var btnCadastro = document.createElement('button');
                 btnCadastro.id = 'btnCadastro';
                 btnCadastro.className = 'dashboard-button';
-                btnCadastro.innerHTML = '📄 Cadastro da propriedade';
+                btnCadastro.innerHTML = '📄 Cadastro da propriedade - Salvar PDF';
 
                 var btnVideo = document.createElement('button');
                 btnVideo.id = 'btnVideo';
@@ -887,6 +975,80 @@
                 body.appendChild(btnCadastro);
                 body.appendChild(btnVideo);
                 body.appendChild(small);
+
+// Painel de tabelas
+var tblContainer = document.createElement('div');
+tblContainer.className = 'eco-tables';
+
+// === TABELA 1 — USO DO SOLO ===
+tblContainer.innerHTML = `
+<details class="eco-table-details" open>
+  <summary>Uso do Solo</summary>
+  <div class="eco-table-wrapper">
+    <table class="eco-table">
+      <thead>
+        <tr>
+          <th>Classe</th><th>Área (ha)</th><th>%</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Pinus</td><td>50,499</td><td>61,3%</td></tr>
+        <tr><td>Sem Pinus</td><td>5,933</td><td>7,2%</td></tr>
+        <tr><td>Compensação</td><td>14,048</td><td>17,1%</td></tr>
+        <tr><td>Estradas</td><td>1,319</td><td>1,6%</td></tr>
+        <tr><td>Açude</td><td>0,376</td><td>0,5%</td></tr>
+        <tr><td>APP</td><td>3,097</td><td>3,8%</td></tr>
+        <tr><td>Reserva Legal</td><td>7,096</td><td>8,6%</td></tr>
+        <tr><td><b>Área Total</b></td><td><b>82,368</b></td><td><b>100,0%</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+</details>
+`;
+
+// === TABELA 2 — CONTAGEM PINUS ===
+tblContainer.innerHTML += `
+<details class="eco-table-details">
+  <summary>Contagem de Pinus</summary>
+  <div class="eco-table-wrapper">
+    <table class="eco-table">
+      <thead>
+        <tr><th>Métrica</th><th>Valor</th><th>Unidade</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Contagem Pinus</td><td>57.832</td><td>árv</td></tr>
+        <tr><td>Área Pinus</td><td>50,499</td><td>ha</td></tr>
+        <tr><td>Densidade</td><td>1145</td><td>árv/ha</td></tr>
+      </tbody>
+    </table>
+  </div>
+</details>
+`;
+
+// === TABELA 3 — AVALIAÇÃO DE FALTA DE MUDAS ===
+tblContainer.innerHTML += `
+<details class="eco-table-details">
+  <summary>Avaliação de Falta de Mudas</summary>
+  <div class="eco-table-wrapper">
+    <table class="eco-table">
+      <thead>
+        <tr><th>Métrica</th><th>Valor</th><th>Unidade</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Se espaçamento for 2,5×2,5m</td><td>1600</td><td>árv/ha</td></tr>
+        <tr><td>Densidade Real</td><td>1145</td><td>árv/ha</td></tr>
+        <tr><td>Déficit</td><td>455</td><td>árv/ha</td></tr>
+        <tr><td>Déficit em Área de Pinus</td><td>22.977</td><td>árv</td></tr>
+        <tr><td>Déficit em Área sem Pinus</td><td>9.493</td><td>árv</td></tr>
+        <tr><td><b>Déficit Total</b></td><td><b>32.470</b></td><td>árv</td></tr>
+      </tbody>
+    </table>
+  </div>
+</details>
+`;
+
+// Inserir o painel no dashboard
+body.appendChild(tblContainer);
 
                 container.appendChild(header);
                 container.appendChild(body);
